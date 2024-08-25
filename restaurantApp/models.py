@@ -20,3 +20,13 @@ class Menu(models.Model):
 
     def __str__(self):
         return self.menu_name
+
+
+class MenuItem(models.Model):
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE, related_name='menuItems')
+    menu_items_name = models.CharField(max_length=100)
+    menu_items_desc = models.TextField()
+    menu_items_price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.menu_items_name

@@ -9,5 +9,7 @@ urlpatterns = [
     path('edit-restaurant/<int:restaurant_id>/', edit_restaurant_view, name='edit_restaurant'),
     path('add-menu/<int:restaurant_id>/', add_menu_view, name='add_menu'),
     path('edit-menu/<int:menu_id>/', edit_menu_view, name='edit_menu'),
+    path('add-menu-items/<int:menu_id>/', add_menu_item_view, name='add_menu_item'),
+    path('edit-menu-items/<int:menu_item_id>/', edit_menu_item_view, name='edit_menu_item'),
 
 ]
