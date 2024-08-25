@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add menu</title>
+</head>
+<body>
+<form method="POST">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit">Add Menu</button>
+</form>
+<p>Restaurant Name : {{ restaurant_obj.restaurant_name }}</p>
+<p>Menu list and menu items: </p>
+{% for all_menu_list in all_menu_lists %}
+    <li>{{ all_menu_list }} -- <a href="{% url 'restaurantApp:edit_menu' all_menu_list.id %}"> Edit menu</a>--<a href="#"> Add items</a></li>
+    <br>
+
+{% endfor %}
+
+</body>
+</html>

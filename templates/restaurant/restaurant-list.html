@@ -13,7 +13,11 @@
 </form>
 <p>Your Restaurant Lists:</p>
 {% for restaurant_list in restaurant_lists %}
-    <li>{{ restaurant_list }} <a href="{% url 'restaurantApp:edit_restaurant' restaurant_list.id %}">Edit</a></li>
+    <li>{{ restaurant_list }}
+        <a href="{% url 'restaurantApp:edit_restaurant' restaurant_list.id %}">Edit</a>
+        <a href="{% url 'restaurantApp:add_menu' restaurant_list.id %}">Add Menu</a>
+
+    </li>
 {% endfor %}
 </body>
 </html>

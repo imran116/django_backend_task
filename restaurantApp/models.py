@@ -11,3 +11,12 @@ class Restaurant(models.Model):
 
     def __str__(self):
         return self.restaurant_name
+
+
+class Menu(models.Model):
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='menus')
+    menu_name = models.CharField(max_length=50)
+    menu_desc = models.TextField()
+
+    def __str__(self):
+        return self.menu_name
