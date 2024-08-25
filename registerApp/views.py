@@ -31,7 +31,7 @@ class login_view(LoginView):
     template_name = 'register/login.html'
 
     def get_success_url(self):
-        return redirect('sign_up').url
+        return redirect('restaurantApp:home').url
 
 def logout_view(request):
     logout(request)

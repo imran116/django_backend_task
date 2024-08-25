@@ -5,6 +5,15 @@
     <title>Restaruant List</title>
 </head>
 <body>
-
+<form method="POST">
+    <p> Add Restaurant</p>
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit">Add</button>
+</form>
+<p>Your Restaurant Lists:</p>
+{% for restaurant_list in restaurant_lists %}
+    <li>{{ restaurant_list }} <a href="{% url 'restaurantApp:edit_restaurant' restaurant_list.id %}">Edit</a></li>
+{% endfor %}
 </body>
 </html>

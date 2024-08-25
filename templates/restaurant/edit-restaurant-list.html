@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Restaurant</title>
+</head>
+<body>
+<form method="POST">
+    <p>Eid Restaurant Name:</p>
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit">Edit</button>
+</form>
+</body>
+</html>
