@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Payment</title>
-    <script src="https://js.stripe.com/v3/"></script> <!-- Include Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
     <h2>Pay for Your Order</h2>
@@ -11,7 +11,6 @@
     <form id="payment-form" method="post" action="{% url 'restaurantApp:process_payment' order.id %}">
         {% csrf_token %}
 
-        <!-- Stripe Elements will create input fields here -->
         <div id="card-element"></div>
         <div id="card-errors" role="alert"></div>
 
@@ -23,7 +22,6 @@
         var stripe = Stripe('pk_test_51PrwGXI3rn6BpbALKwh82i3pufZLtvYupcy4ZVkZq9KFl0T1qzd03hE5zuXASeBu8m8apoLSR1vvam7wyHD7hoQ5006zqJjiTJ');
         var elements = stripe.elements();
 
-        // Create an instance of the card Element
         var card = elements.create('card');
 
         // Add an instance of the card Element into the `card-element` <div>

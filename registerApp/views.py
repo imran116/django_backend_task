@@ -21,8 +21,8 @@ def sign_up_view(request):
                 phone=phone,
                 address=address,
             )
-            return render(request, 'restaurant/restaurant-list.html')
-
+            # return render(request, 'restaurant/restaurant-list.html')
+            return redirect('login')
     return render(request, 'register/sign-up.html', {'form': form})
 
 
@@ -36,4 +36,4 @@ class login_view(LoginView):
 
 def logout_view(request):
     logout(request)
-    return render(request, 'register/sign-up.html')
+    return redirect('login')

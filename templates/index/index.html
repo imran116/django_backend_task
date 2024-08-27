@@ -11,7 +11,9 @@
 
 
 {% else %}
-    <p>All Restaurant List</p>
+    <h2>All Restaurant List</h2>
+    <p><a href="{% url 'logout' %}">logout</a></p>
+    <hr>
     {% for all_restaurant_list in all_restaurant_lists %}
         <p> Restaurant Name: {{ all_restaurant_list }}</p>
         <p>Menu list</p>

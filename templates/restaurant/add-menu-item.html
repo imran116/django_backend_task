@@ -9,6 +9,7 @@
     {{ form.as_p }}
     {% csrf_token %}
     <button>Add items</button>
+    <a href="{% url 'restaurantApp:add_restaurant' %}">Restaurant List</a>
 </form>
 <p>Menu Name: {{ menu_obj.menu_name }} </p>
 <p>Menu Items List</p>

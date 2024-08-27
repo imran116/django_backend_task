@@ -11,19 +11,10 @@ urlpatterns = [
     path('edit-menu/<int:menu_id>/', edit_menu_view, name='edit_menu'),
     path('add-menu-items/<int:menu_id>/', add_menu_item_view, name='add_menu_item'),
     path('edit-menu-items/<int:menu_item_id>/', edit_menu_item_view, name='edit_menu_item'),
-
     path('menu-items/<int:menu_id>/', menu_view, name='menu_view'),
     path('checkout/', checkout_view, name='checkout'),
-    # path('create-payment-intent/', create_payment_intent, name='create_payment_intent'),
     path('success/', payment_success, name='payment_success'),
-
-
     path('order/<str:item_id>/', order_view, name='order'),
-
-
-
     path('payment-process/<str:order_id>/', process_payment, name='process_payment'),
-
-    # path('create-payment-intent/', StripeIntentView.as_view(), name='create-payment-intent'),
 
 ]

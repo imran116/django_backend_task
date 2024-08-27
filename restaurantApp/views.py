@@ -1,13 +1,11 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.views import View
-
 from .forms import RestaurantForm, MenuForm, MenuItemForm
 from .models import Restaurant, Menu, MenuItem, Order
 import stripe
 from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
+
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -127,45 +125,25 @@ def checkout_view(request):
     return render(request, 'checkout/checkout.html')
 
 
-@csrf_exempt
-def create_payment_intent(request):
-    if request.method == 'POST':
-        try:
-            # Create a PaymentIntent with the order amount and currency
-            payment_intent = stripe.PaymentIntent.create(
-                amount=1000,  # Amount in cents (e.g., 1000 = $10.00)
-                currency='usd',
-                automatic_payment_methods={
-                    'enabled': True,
-                },
-            )
-            return JsonResponse({'clientSecret': payment_intent['client_secret']})
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=400)
-    return JsonResponse({'error': 'Invalid request method'}, status=400)
-
-
 def payment_success(request):
     return render(request, 'checkout/payment_success.html')
 
 
-# new ------------------------------------------->>>>>>>>>>>>>>>>>>
-def process_payment(request,order_id):
+def process_payment(request, order_id):
     if request.method == 'POST':
-        order = get_object_or_404(MenuItem, id=order_id)  # Assuming id=1 for the example; replace with dynamic order ID
+        order = get_object_or_404(MenuItem, id=order_id)
         token = request.POST.get('stripeToken')
 
         try:
-            # Create a Customer: this will create a customer in Stripe
             customer = stripe.Customer.create(
-                email=request.user.email,  # Use the user's email from Django's auth user model
+                email=request.user.email,
                 source=token
 
             )
 
             charge = stripe.Charge.create(
-                customer=customer.id,  # Pass the customer ID instead of the source token
-                amount=int(order.menu_items_price * 100),  # Amount in cents
+                customer=customer.id,
+                amount=int(order.menu_items_price * 100),
                 currency='usd',
                 description=f"Order #{order.id} Payment success",
 
@@ -175,8 +153,7 @@ def process_payment(request,order_id):
             order.paid = True
             order.save()
 
-            return redirect('restaurantApp:payment_success')  # Redirect to a success page
-
+            return redirect('restaurantApp:payment_success')
         except stripe.error.CardError as e:
 
             return JsonResponse({'status': 'failed', 'message': str(e)}, status=400)
@@ -184,7 +161,7 @@ def process_payment(request,order_id):
     return render(request, 'checkout/checkout.html')
 
 
-def order_view(request,item_id):
+def order_view(request, item_id):
     get_menu_list = MenuItem.objects.get(id=item_id)
 
     order = Order.objects.create(
@@ -196,5 +173,4 @@ def order_view(request,item_id):
         menu_item_price=get_menu_list.menu_items_price,
     )
     order.save()
-    return render(request, 'checkout/checkout.html',{'order':order})
-
+    return render(request, 'checkout/checkout.html', {'order': order})
