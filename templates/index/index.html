@@ -5,16 +5,24 @@
     <title>Home Page</title>
 </head>
 <body>
-      {% if request.user.profile.role == 'owner' %}
-          <a href="{% url 'restaurantApp:add_restaurant' %}">Add Restaurant</a>
-          <br>
+{% if request.user.profile.role == 'owner' %}
+    <a href="{% url 'restaurantApp:add_restaurant' %}">Add Restaurant</a>
+    <br>
 
 
 {% else %}
-           <p>All Restaurant List</p>
-          {% for all_restaurant_list in all_restaurant_lists %}
-          <li>{{ all_restaurant_list }}</li>
-          {% endfor %}
+    <p>All Restaurant List</p>
+    {% for all_restaurant_list in all_restaurant_lists %}
+        <p> Restaurant Name: {{ all_restaurant_list }}</p>
+        <p>Menu list</p>
+        {% for menu in all_restaurant_list.menus.all %}
+            <ul>
+                <li>{{ menu.menu_name }}-- <a href="{% url 'restaurantApp:menu_view' menu.id %}">view menu</a></li>
+            </ul>
+        {% endfor %}
+        <hr>
+
+    {% endfor %}
 {% endif %}
 </body>
 </html>

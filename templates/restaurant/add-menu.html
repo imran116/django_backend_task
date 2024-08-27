@@ -15,7 +15,7 @@
 {% for all_menu_list in all_menu_lists %}
     <li>{{ all_menu_list }} -- <a href="{% url 'restaurantApp:edit_menu' all_menu_list.id %}"> Edit menu</a>--<a href="{% url 'restaurantApp:add_menu_item' all_menu_list.id %}"> Add items</a></li>
     {% for i in all_menu_list.menuItems.all %}
-        {{ i. }}
+{#        {{ i. }}#}
         {% endfor %}
     <br>
 

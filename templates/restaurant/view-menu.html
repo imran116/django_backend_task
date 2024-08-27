@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View menu</title>
+</head>
+<body>
+<p>Menu Name : {{ menu_obj.menu_name }}</p>
+{% for menu_list in menu_lists %}
+    <p>Item Name: {{ menu_list.menu_items_name }}</p>
+    <p>Item Description: {{ menu_list.menu_items_desc }}</p>
+    <p>Item Price: {{ menu_list.menu_items_price }}</p>
+    <a href="{% url 'restaurantApp:order' menu_list.id %}">Order Now</a>
+{% endfor %}
+
+</body>
+</html>

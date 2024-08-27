@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -62,6 +63,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'RestaurantManagement.wsgi.application'
 
 
+STRIPE_PUBLIC_KEY = 'pk_test_51PrwGXI3rn6BpbALKwh82i3pufZLtvYupcy4ZVkZq9KFl0T1qzd03hE5zuXASeBu8m8apoLSR1vvam7wyHD7hoQ5006zqJjiTJ'
+
+STRIPE_SECRET_KEY = 'sk_test_51PrwGXI3rn6BpbALrbj76Fv6g5SUtRAvX9PvUy2O6ikR9w6p5QZHJIxqGoINF3icrag4fiH17X28JSGqVnE0Ukpt00EdVP42qJ'
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -108,7 +113,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
